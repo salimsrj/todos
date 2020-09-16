@@ -21,4 +21,14 @@ class Task{
         return $updateTask;        
     }
 
+
+    public function updateTask($id, $title){
+        $pdo = new DbCon();
+        $conn = $pdo->open();
+        $stmt= $conn->prepare("UPDATE tasks SET title=:title WHERE id=:id");
+        $update = $stmt->execute(['title'=> $title, 'id'=>$id]);
+        $pdo->close();
+        return $id; 
+    }
+
 }

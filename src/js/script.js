@@ -13,6 +13,9 @@ new Vue({
         editTodo: function(todo) {
             this.editedTodo = todo;
         },
+        update_title: function(id, title) {
+            axios.post('/updateTask.php', { 'id': id, 'title': title })
+        },
         addTask: function() {
             axios.post('/addtask.php', { 'new_task': this.newTask })
                 .then(response => {
