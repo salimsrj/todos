@@ -21,6 +21,7 @@ new Vue({
                 .then(response => {
                     this.todos.push({ 'id': response.data, 'title': this.newTask, 'status': '0', 'edit': false });
                     this.newTask = '';
+                    this.leftItemsfunc();
 
                 })
                 .catch(function(error) {
