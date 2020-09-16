@@ -10,24 +10,10 @@ new Vue({
             this.editedTodo = todo;
         },
         addTask: function() {
-
-            // axios[requestType](url, this.data())
-            //     .then(response => {
-            //         this.onSuccess(response.data);
-
-            //         resolve(response.data);
-            //     })
-            //     .catch(error => {
-            //         this.onFail(error.response.data.errors);
-
-            //         //reject(error.response.data.errors);
-            //     });
-
-
-            axios.post('/addtask.php', this.newTask)
-                .then(function(response) {
-                    // handle success
-                    console.log(response);
+            axios.post('/addtask.php', { 'new_task': this.newTask })
+                .then(response => {
+                    this.todos.push({ 'id': response.data, 'title': this.newTask, 'edit': false });
+                    this.newTask = '';
                 })
                 .catch(function(error) {
                     // handle error
@@ -36,11 +22,6 @@ new Vue({
                 .then(function() {
                     // always executed
                 });
-
-            this.todos.push({ 'title': this.newTask, 'edit': false });
-            this.newTask = '';
-
-
 
         }
     },
