@@ -1,0 +1,41 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+ul.todo-list {
+    list-style: none;
+    padding: 0;
+}
+
+label.complete {
+    text-decoration: line-through;
+    padding-left: 18px;
+}
+
+.hide {
+    display: none;
+}
+
+label.complete::before {
+    content: "\2705";
+    height: 10px;
+    width: 10px;
+    display: inline-block;
+    position: relative;
+    left: -15px;
+    font-size: 12px;
+}
+
+.bottom.bar {
+    display: flex;
+}
+
+.total_item {
+    padding-right: 10px;
+}
+
+.clear_complete {
+    padding-left: 10px;
+}

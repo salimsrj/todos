@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Assignmemnt for Wedevs</title>
+  <link rel="stylesheet" href="src/css/style.css">
 </head>
 
 <body>
@@ -26,7 +27,7 @@
               v-bind:class="[{ complete: todo.status == 1}, {complete:checkedId.includes(todo.id) }]"> {{todo.title}}
             </label>
           </div>
-          <input v-show="todo.edit == true" v-model="eiditedTitle" v-on:blur="todo.edit=false; $emit('update')"
+          <input v-show="todo.edit == true" v-model="todo.title" v-on:blur="todo.edit=false; $emit('update')"
             @keyup.enter="todo.edit=false; $emit('update');">
         </li>
       </ul>
@@ -54,47 +55,4 @@
   <script src="src/js/axios.min.js"></script>
   <script src="src/js/script.js"></script>
 </body>
-<style>
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-
-  ul.todo-list {
-    list-style: none;
-    padding: 0;
-  }
-
-  label.complete {
-    text-decoration: line-through;
-    padding-left: 18px;
-  }
-
-  .hide {
-    display: none;
-  }
-
-  label.complete::before {
-    content: "\2705";
-    height: 10px;
-    width: 10px;
-    display: inline-block;
-    position: relative;
-    left: -15px;
-    font-size: 12px;
-  }
-
-  .bottom.bar {
-    display: flex;
-}
-.total_item {
-    padding-right: 10px;
-}
-.clear_complete {
-    padding-left: 10px;
-}
-
-</style>
-
 </html>
