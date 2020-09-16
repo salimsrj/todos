@@ -6,6 +6,8 @@
     <title>Document</title>
 </head>
 <body>
+<div class="container">
+
     <h1>Todos</h1>
 
 <div id="app">
@@ -16,7 +18,8 @@
 <ul class="todo-list">
   <li v-for = "todo in todos">
     <div v-show = "todo.edit == false">
-      <label @dblclick = "todo.edit = true"> {{todo.title}} </label>
+      <input v-if="todo.status == 0" type="checkbox" :value="todo.id" :id="todo.id" v-model="checkedId" @change="check($event)">
+      <label @dblclick = "todo.edit = true" v-bind:class="[{ complete: todo.status == 1}, {complete:checkedId.includes(todo.id) }]"> {{todo.title}} </label>
     </div>
     <input v-show = "todo.edit == true" v-model = "todo.title"
     v-on:blur= "todo.edit=false; $emit('update')"
@@ -26,9 +29,24 @@
 
 
 </div>
+</div>
 <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
     <script src="src/js/vue.js"></script>
     <script src="src/js/axios.min.js"></script>
     <script src="src/js/script.js"></script>
 </body>
+<style>
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+ul.todo-list {
+    list-style: none;
+    padding: 0;
+}
+label.complete {
+    text-decoration: line-through;
+}
+</style>
 </html>

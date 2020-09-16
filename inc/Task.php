@@ -12,6 +12,13 @@ class Task{
         return $taskID;
     }
 
+    public function completeTask($updateTask){
+        $pdo = new DbCon();
+        $conn = $pdo->open();
+        $stmt= $conn->prepare("UPDATE tasks SET status=:status WHERE id=:id");
+        $stmt->execute(['status'=> 1, 'id'=>$updateTask]);
+    }
+
     public function taskList(){
         echo 'tasklist';
     }

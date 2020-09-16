@@ -20,6 +20,7 @@ class taskList
             $taskArray[$i] = array(
                 'id' => $task['id'],
                 'title' => $task['title'],
+                'status' => $task['status'],
                 'edit' => false,
             );
             $i++;

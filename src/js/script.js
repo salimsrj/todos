@@ -4,6 +4,8 @@ new Vue({
         newTask: '',
         todos: [],
         editedTodo: null,
+        checkedId: [],
+        isChecked: []
     },
     methods: {
         editTodo: function(todo) {
@@ -12,8 +14,9 @@ new Vue({
         addTask: function() {
             axios.post('/addtask.php', { 'new_task': this.newTask })
                 .then(response => {
-                    this.todos.push({ 'id': response.data, 'title': this.newTask, 'edit': false });
+                    this.todos.push({ 'id': response.data, 'title': this.newTask, 'status': '0', 'edit': false });
                     this.newTask = '';
+
                 })
                 .catch(function(error) {
                     // handle error
@@ -23,6 +26,15 @@ new Vue({
                     // always executed
                 });
 
+        },
+        check: function() {
+            console.log(this.checkedId)
+            axios.post('/completetask.php', { 'update_task': this.checkedId })
+                .then(response => {
+                    this.isChecked.push(this.checkedId)
+                        // this.todos.push({ 'id': response.data, 'title': this.newTask, 'edit': false });
+                        // this.newTask = '';
+                })
         }
     },
     mounted: function() {
