@@ -26,8 +26,8 @@
               v-bind:class="[{ complete: todo.status == 1}, {complete:checkedId.includes(todo.id) }]"> {{todo.title}}
             </label>
           </div>
-          <input v-show="todo.edit == true" v-model="todo.title" v-on:blur="todo.edit=false; $emit('update')"
-            @keyup.enter="todo.edit=false; $emit('update')">
+          <input v-show="todo.edit == true" v-model="eiditedTitle" v-on:blur="todo.edit=false; $emit('update')"
+            @keyup.enter="todo.edit=false; $emit('update');">
         </li>
       </ul>
 

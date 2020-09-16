@@ -3,12 +3,11 @@ new Vue({
     data: {
         newTask: '',
         todos: [],
-        editedTodo: {
-            title: ''
-        },
+        editedTodo: null,
         checkedId: [],
         isChecked: [],
-        leftItems: '0'
+        leftItems: '0',
+        eiditedTitle: ''
     },
     methods: {
         editTodo: function(todo) {
