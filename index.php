@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Assignmemnt for Wedevs</title>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
       <!-- <button @click="addTask">add</button> -->
 
       <ul class="todo-list">
-        <li v-for="todo in todos">
+        <li v-for="(todo, index) in todos">
           <div v-show="todo.edit == false">
             <input v-if="todo.status == 0" type="checkbox" :value="todo.id" :id="todo.id" v-model="checkedId"
               @change="check($event)" v-bind:class="[ {hide:checkedId.includes(todo.id) }]">
@@ -34,6 +34,7 @@
 
       <div class="bottom bar">
       <div class="total_item">
+      {{leftItems}} items Left
       </div>
       <div class="buttons">
         <button @click="allTask">All</button>
@@ -41,7 +42,7 @@
         <button @click="completeList">Completed</button>
       </div>
       <div class="clear_complete">
-        <button>Clear Completed</button>
+        <button @click="clearCompleteList">Clear Completed</button>
       </div>
     </div>
 
@@ -86,6 +87,12 @@
 
   .bottom.bar {
     display: flex;
+}
+.total_item {
+    padding-right: 10px;
+}
+.clear_complete {
+    padding-left: 10px;
 }
 
 </style>

@@ -3,9 +3,12 @@ new Vue({
     data: {
         newTask: '',
         todos: [],
-        editedTodo: null,
+        editedTodo: {
+            title: ''
+        },
         checkedId: [],
-        isChecked: []
+        isChecked: [],
+        leftItems: '0'
     },
     methods: {
         editTodo: function(todo) {
@@ -28,12 +31,17 @@ new Vue({
 
         },
         check: function() {
-            console.log(this.checkedId)
+            //console.log(this.checkedId)
             axios.post('/completetask.php', { 'update_task': this.checkedId })
                 .then(response => {
-                    this.isChecked.push(this.checkedId)
-                        // this.todos.push({ 'id': response.data, 'title': this.newTask, 'edit': false });
-                        // this.newTask = '';
+                    this.isChecked.push(response.data);
+                    var item = this.todos.find(x => x.id == response.data);
+                    if (item) {
+                        item.status = 1;
+                    }
+                    this.checkedId = [];
+                    this.leftItemsfunc();
+
                 })
         },
         activeList: function() {
@@ -70,17 +78,40 @@ new Vue({
                 .then(function() {
                     // always executed
                 });
+        },
+
+
+        clearCompleteList: function() {
+            axios.get('/clear.php')
+                .then(response => (this.todos = response.data))
+                .catch(function(error) {
+                    // handle error
+                    console.log(error);
+                })
+                .then(function() {
+                    // always executed
+                });
+        },
+        leftItemsfunc: function() {
+            $qty = this.todos.filter(value => value.status == 0).length;;
+            this.leftItems = $qty;
         }
+
     },
     mounted: function() {
         axios.get('/tasklist.php')
-            .then(response => (this.todos = response.data))
+            .then(response => {
+                    this.todos = response.data;
+                    this.leftItemsfunc();
+                }
+
+            )
             .catch(function(error) {
                 // handle error
                 console.log(error);
             })
             .then(function() {
-                // always executed
+
             });
     }
 
