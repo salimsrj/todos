@@ -1,5 +1,5 @@
 .container {
-    max-width: 800px;
+    max-width: 550px;
     margin: 0 auto;
     padding: 20px;
 }
@@ -38,4 +38,26 @@ label.complete::before {
 
 .clear_complete {
     padding-left: 10px;
+}
+
+ul.todo-list li div {
+    display: flex;
+    justify-content: space-between;
+}
+
+label {
+    display: inline-block;
+    width: 100%;
+}
+
+span.delete_btn {
+    font-size: 10px;
+    color: red;
+    cursor: pointer;
+    padding: 5px;
+}
+
+span.delete_btn:hover {
+    background: red;
+    color: #ffffff;
 }

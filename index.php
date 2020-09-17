@@ -25,10 +25,11 @@
               @change="check($event)" v-bind:class="[ {hide:checkedId.includes(todo.id) }]">
             <label @dblclick="todo.edit = true"
               v-bind:class="[{ complete: todo.status == 1}, {complete:checkedId.includes(todo.id) }]"> {{todo.title}}
-            </label>
+            </label><span class="delete_btn" @click="deleteItem(todo.id, index)">X</sapn>
           </div>
           <input v-show="todo.edit == true" v-model="todo.title" v-on:blur="todo.edit=false; $emit('update'); update_title(todo.id, todo.title)"
             @keyup.enter="todo.edit=false; $emit('update'); update_title(todo.id, todo.title)">
+            
         </li>
       </ul>
 
@@ -43,7 +44,7 @@
         <button @click="completeList">Completed</button>
       </div>
       <div class="clear_complete">
-        <button @click="clearCompleteList">Clear Completed</button>
+        <button v-if="checkComplete()" @click="clearCompleteList">Clear Completed</button>
       </div>
     </div>
 

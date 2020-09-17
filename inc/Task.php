@@ -31,4 +31,13 @@ class Task{
         return $id; 
     }
 
+    public function delete($id){
+        $pdo = new DbCon();
+        $conn = $pdo->open();
+        $stmt= $conn->prepare("DELETE FROM  tasks WHERE id=:id");
+        $update = $stmt->execute(['id'=>$id]);
+        $pdo->close();
+        return $id; 
+    }
+
 }

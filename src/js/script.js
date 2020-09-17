@@ -98,7 +98,28 @@ new Vue({
         leftItemsfunc: function() {
             $qty = this.todos.filter(value => value.status == 0).length;;
             this.leftItems = $qty;
+        },
+        checkComplete: function() {
+            $qty = this.todos.filter(value => value.status == 1).length;;
+            if ($qty > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        },
+
+        deleteItem: function(id, index) {
+            axios.post('/deleteTask.php', { 'id': id })
+                .then(response => {
+                    console.log(response.data);
+                    // let i = this.todos.map(item => item.id).indexOf(response.data) // find index of your object
+                    // this.todos.splice(i, 1);
+                    this.todos.splice(index, 1);
+                    this.leftItemsfunc();
+                });
+
         }
+
 
     },
     mounted: function() {
